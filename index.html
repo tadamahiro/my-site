@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>まひろのオンラインジム | 運動を習慣に</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f7f3ee;
+    --warm-white: #faf8f5;
+    --sage: #8a9e7e;
+    --sage-light: #b5c4ac;
+    --sage-dark: #5a7050;
+    --brown: #7a6855;
+    --brown-light: #c4b09a;
+    --brown-dark: #4a3f30;
+    --text: #2d2820;
+    --text-muted: #8a7e72;
+    --border: #e0d8ce;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 248, 245, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--brown-dark);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--sage-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 70px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 15%; bottom: 15%;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--sage-dark);
+    border: 1px solid var(--sage-light);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--brown-dark);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--sage-dark);
+    position: relative;
+  }
+
+  .hero-title em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 2px;
+    background: var(--sage-light);
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    max-width: 360px;
+    margin-bottom: 2.5rem;
+    line-height: 2;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--sage-dark);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 0.1em;
+    transition: all 0.3s;
+    width: fit-content;
+  }
+
+  .btn-primary:hover {
+    background: var(--brown-dark);
+    transform: translateY(-2px);
+  }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-visual {
+    position: relative;
+    width: 320px;
+    height: 420px;
+  }
+
+  .hero-card {
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+  }
+
+  .hero-card-main {
+    width: 260px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-card-main .card-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--sage-dark);
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-card-main .card-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.1rem;
+    color: var(--brown-dark);
+    margin-bottom: 1rem;
+  }
+
+  .day-dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .day-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 500;
+  }
+
+  .day-dot.done { background: var(--sage-dark); color: white; }
+  .day-dot.today { background: var(--brown-light); color: white; }
+  .day-dot.upcoming { background: var(--cream); color: var(--text-muted); border: 1px solid var(--border); }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--cream);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 57%;
+    background: linear-gradient(90deg, var(--sage-light), var(--sage-dark));
+    border-radius: 4px;
+    animation: fillProgress 1.5s ease-out 0.5s both;
+  }
+
+  @keyframes fillProgress {
+    from { width: 0; }
+    to { width: 57%; }
+  }
+
+  .hero-card-mini {
+    width: 150px;
+    padding: 1rem;
+  }
+
+  .hero-card-mini-1 {
+    top: 30px;
+    right: -20px;
+    transform: rotate(3deg);
+  }
+
+  .hero-card-mini-2 {
+    bottom: 40px;
+    left: -20px;
+    transform: rotate(-2deg);
+  }
+
+  .mini-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .mini-icon.green { background: #e8f0e4; }
+  .mini-icon.brown { background: #f0e8dc; }
+
+  .mini-text {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .mini-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.3rem;
+    color: var(--brown-dark);
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 6rem 5rem;
+  }
+
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--sage-dark);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 500;
+    color: var(--brown-dark);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 2;
+  }
+
+  /* CONCEPT */
+  .concept {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .concept-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .concept-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .concept-card:first-child {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .concept-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .concept-card-title {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--brown-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .concept-card-text {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* FOR WHO */
+  .for-who {
+    background: white;
+  }
+
+  .for-who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .for-who-item {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    border: 1px solid var(--border);
+    transition: transform 0.3s;
+  }
+
+  .for-who-item:hover { transform: translateY(-4px); }
+
+  .for-who-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 2rem;
+    color: var(--sage-light);
+    margin-bottom: 0.8rem;
+  }
+
+  .for-who-text {
+    font-size: 0.88rem;
+    color: var(--text);
+    font-weight: 400;
+    line-height: 1.8;
+  }
+
+  /* 7 DAYS */
+  .seven-days {
+    background: var(--cream);
+  }
+
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.8rem;
+    margin-top: 3rem;
+  }
+
+  .day-item {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .day-item:hover {
+    border-color: var(--sage-light);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(90, 112, 80, 0.1);
+  }
+
+  .day-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.7rem;
+    color: var(--sage-dark);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+  }
+
+  .day-theme {
+    font-size: 0.78rem;
+    color: var(--brown-dark);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .day-bar {
+    height: 3px;
+    background: var(--cream);
+    border-radius: 3px;
+    margin: 1rem auto 0;
+    width: 80%;
+    overflow: hidden;
+  }
+
+  .day-bar-fill {
+    height: 100%;
+    background: var(--sage-light);
+    border-radius: 3px;
+    width: 0;
+    transition: width 0.8s ease;
+  }
+
+  .day-item:hover .day-bar-fill { width: 100%; }
+
+  /* PROFILE */
+  .profile {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .profile-img-wrap {
+    position: relative;
+  }
+
+  .profile-img-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--cream);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .profile-img-placeholder span {
+    font-size: 3rem;
+  }
+
+  .profile-img-placeholder p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .profile-badge {
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    background: var(--sage-dark);
+    color: white;
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .profile-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.8rem;
+    color: var(--brown-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .profile-title {
+    font-size: 0.82rem;
+    color: var(--sage-dark);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-text {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 2.2;
+    margin-bottom: 2rem;
+  }
+
+  .profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .profile-tag {
+    font-size: 0.75rem;
+    color: var(--sage-dark);
+    border: 1px solid var(--sage-light);
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+  }
+
+  /* CTA */
+  .cta {
+    background: var(--brown-dark);
+    text-align: center;
+    padding: 6rem 5rem;
+  }
+
+  .cta .section-tag { color: var(--brown-light); }
+
+  .cta .section-title { color: white; }
+
+  .cta .section-sub {
+    color: rgba(255,255,255,0.6);
+    margin: 1rem auto 2.5rem;
+  }
+
+  .btn-light {
+    display: inline-block;
+    background: white;
+    color: var(--brown-dark);
+    padding: 1rem 2.5rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .btn-light:hover {
+    background: var(--cream);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 4rem 1.5rem 2rem; }
+    .hero-left::after { display: none; }
+    .hero-right { height: 320px; }
+    .hero-visual { width: 240px; height: 300px; }
+    .hero-card-main { width: 200px; }
+    section { padding: 4rem 1.5rem; }
+    .concept { grid-template-columns: 1fr; gap: 2rem; }
+    .for-who-grid { grid-template-columns: 1fr; }
+    .days-grid { grid-template-columns: repeat(4, 1fr); }
+    .profile { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-card-mini { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">まひろのオンラインジム</div>
+  <ul class="nav-links">
+    <li><a href="#concept">コンセプト</a></li>
+    <li><a href="#program">プログラム</a></li>
+    <li><a href="#profile">プロフィール</a></li>
+    <li><a href="#cta">お申し込み</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">ONLINE GYM BY MAHIRO</span>
+    <h1 class="hero-title">
+      運動を<em>やる気</em>ではなく、<br>
+      習慣として続ける。
+    </h1>
+    <p class="hero-sub">
+      忙しい毎日の中でも、歯磨きのように自然と運動できる仕組みをつくります。特別な意志力は必要ありません。
+    </p>
+    <a href="#cta" class="btn-primary">7日間プログラムを見る</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-card hero-card-main">
+        <div class="card-label">7日間習慣リセット</div>
+        <div class="card-title">今日はDAY 4</div>
+        <div class="day-dots">
+          <div class="day-dot done">1</div>
+          <div class="day-dot done">2</div>
+          <div class="day-dot done">3</div>
+          <div class="day-dot today">4</div>
+          <div class="day-dot upcoming">5</div>
+          <div class="day-dot upcoming">6</div>
+          <div class="day-dot upcoming">7</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+      <div class="hero-card hero-card-mini hero-card-mini-1">
+        <div class="mini-icon green">🌿</div>
+        <div class="mini-num">3分</div>
+        <div class="mini-text">毎日の運動時間</div>
+      </div>
+      <div class="hero-card hero-card-mini hero-card-mini-2">
+        <div class="mini-icon brown">✓</div>
+        <div class="mini-num">週1回</div>
+        <div class="mini-text">プロのサポート</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept fade-up" id="concept">
+  <div>
+    <div class="section-tag">CONCEPT</div>
+    <h2 class="section-title">
+      続かないのは<br>意志が弱いからじゃない。
+    </h2>
+    <p class="section-sub">
+      運動が続かない本当の理由は、仕組みがないから。まひろのオンラインジムでは、習慣設計の専門知識を使って、あなたの生活に自然と溶け込む運動の仕組みをつくります。
+    </p>
+  </div>
+  <div class="concept-visual">
+    <div class="concept-card">
+      <div class="concept-icon">🌿</div>
+      <div>
+        <div class="concept-card-title">やる気に頼らない設計</div>
+        <div class="concept-card-text">モチベーションが低い日でも続けられる仕組みを一緒に作ります</div>
+      </div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-icon">⏱</div>
+      <div class="concept-card-title">1日3分から</div>
+      <div class="concept-card-text">忙しくても続けられる現実的な時間設計</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-icon">🗓</div>
+      <div class="concept-card-title">週1サポート</div>
+      <div class="concept-card-text">毎週プロが進捗を確認してアドバイス</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="for-who fade-up" id="forwho">
+  <div class="section-tag">FOR WHO</div>
+  <h2 class="section-title">こんな方におすすめです</h2>
+  <div class="for-who-grid">
+    <div class="for-who-item">
+      <div class="for-who-num">01</div>
+      <div class="for-who-text">仕事が忙しくて運動の時間がなかなか取れない社会人の方</div>
+    </div>
+    <div class="for-who-item">
+      <div class="for-who-num">02</div>
+      <div class="for-who-text">何度チャレンジしても運動が続かず、自己嫌悪になってしまう方</div>
+    </div>
+    <div class="for-who-item">
+      <div class="for-who-num">03</div>
+      <div class="for-who-text">20代後半〜40代で、無理なく健康的な習慣を身につけたい方</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 DAYS -->
+<section class="seven-days fade-up" id="program">
+  <div class="section-tag">PROGRAM</div>
+  <h2 class="section-title">7日間習慣リセット</h2>
+  <p class="section-sub">運動メニューはご購入後、あなたの生活スタイルに合わせて個別にご提案します。</p>
+  <div class="days-grid">
+    <div class="day-item">
+      <div class="day-num">DAY 1</div>
+      <div class="day-theme">とりあえずやる</div>
+      <div class="day-bar"><div class="day-bar-fill"></div></div>
+    </div>
+    <div class="day-item">
+      <div class="day-num">DAY 2</div>
+      <div class="day-theme">タイミングを決める</div>
+      <div class="day-bar"><div class="day-bar-fill"></div></div>
+    </div>
+    <div class="day-item">
+      <div class="day-num">DAY 3</div>
+      <div class="day-theme">環境を作る</div>
+      <div class="day-bar"><div class="day-bar-fill"></div></div>
+    </div>
+    <div class="day-item">
+      <div class="day-num">DAY 4</div>
+      <div class="day-theme">サボり対策</div>
+      <div class="day-bar"><div class="day-bar-fill"></div></div>
+    </div>
+    <div class="day-item">
+      <div class="day-num">DAY 5</div>
+      <div class="day-theme">少し負荷UP</div>
+      <div class="day-bar"><div class="day-bar-fill"></div></div>
+    </div>
+    <div class="day-item">
+      <div class="day-num">DAY 6</div>
+      <div class="day-theme">自動化確認</div>
+      <div class="day-bar"><div class="day-bar-fill"></div></div>
+    </div>
+    <div class="day-item">
+      <div class="day-num">DAY 7</div>
+      <div class="day-theme">継続設計</div>
+      <div class="day-bar"><div class="day-bar-fill"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile fade-up" id="profile">
+  <div class="profile-img-wrap">
+    <div class="profile-img-placeholder">
+      <span>🌿</span>
+      <p>ここに写真を入れてください</p>
+    </div>
+    <div class="profile-badge">
+      パーソナルトレーナー<br>習慣化コーチ
+    </div>
+  </div>
+  <div>
+    <div class="section-tag">PROFILE</div>
+    <h2 class="profile-name">まひろ</h2>
+    <div class="profile-title">PERSONAL TRAINER / HABIT COACH</div>
+    <p class="profile-text">
+      「運動したいけど続かない」という悩みを持つ方専門のパーソナルトレーナー。筋トレの知識だけでなく、習慣設計の観点から、あなたの生活に自然と溶け込む運動の仕組みづくりをサポートします。<br><br>
+      忙しい社会人の方が、やる気に頼らず長く続けられる仕組みを一緒に作ることが得意です。
+    </p>
+    <div class="profile-tags">
+      <span class="profile-tag">パーソナルトレーナー</span>
+      <span class="profile-tag">習慣化サポート</span>
+      <span class="profile-tag">社会人専門</span>
+      <span class="profile-tag">オンライン対応</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta fade-up" id="cta">
+  <div class="section-tag">GET STARTED</div>
+  <h2 class="section-title">まず、7日間試してみませんか？</h2>
+  <p class="section-sub">ご購入後にあなたの生活スタイルをお聞きして、個別のプログラムをご提案します。</p>
+  <a href="https://coconala.com" class="btn-light" target="_blank">ココナラで申し込む →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 まひろのオンラインジム. All rights reserved.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
