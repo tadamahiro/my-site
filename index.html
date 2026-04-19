@@ -3,907 +3,482 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>marogym | 運動を習慣に</title>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<title>marogym | ゆるく続けられる人になる。</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --cream: #f7f3ee;
-    --warm-white: #faf8f5;
-    --sage: #8a9e7e;
-    --sage-light: #b5c4ac;
-    --sage-dark: #5a7050;
-    --brown: #7a6855;
-    --brown-light: #c4b09a;
-    --brown-dark: #4a3f30;
-    --text: #2d2820;
-    --text-muted: #8a7e72;
-    --border: #e0d8ce;
+    --bg:       #f8f8f6;
+    --bg2:      #efefed;
+    --white:    #ffffff;
+    --navy:     #1a2d4a;
+    --navy2:    #243d62;
+    --navy3:    #2e4f7c;
+    --blue:     #2563c8;
+    --blue2:    #3b7ae0;
+    --blue-pale:#e8eef8;
+    --black:    #111111;
+    --dark:     #222222;
+    --mid:      #555555;
+    --light:    #888888;
+    --border:   #dddcda;
   }
 
-  html { scroll-behavior: smooth; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
 
   body {
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-    background: var(--warm-white);
-    color: var(--text);
-    line-height: 1.8;
-    font-weight: 300;
+    background: var(--bg);
+    color: var(--dark);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
   }
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.2rem 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(250, 248, 245, 0.92);
-    backdrop-filter: blur(12px);
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 0 40px; height:60px;
+    background: rgba(248,248,246,0.97);
     border-bottom: 1px solid var(--border);
+    backdrop-filter:blur(8px);
   }
-
-  .nav-logo {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--brown-dark);
-    letter-spacing: 0.05em;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover { color: var(--sage-dark); }
-
-  .nav-social {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    margin-left: 2rem;
-  }
-
-  .nav-social a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    transition: all 0.3s;
-  }
-
-  .nav-social a:hover {
-    border-color: var(--sage-light);
-    color: var(--sage-dark);
-    background: var(--cream);
-  }
-
-  .nav-social svg { width: 15px; height: 15px; fill: currentColor; }
+  .logo { font-size:18px; font-weight:900; letter-spacing:3px; color:var(--navy); }
+  .logo em { color:var(--blue); font-style:normal; }
+  nav ul { list-style:none; display:flex; gap:28px; }
+  nav a { color:var(--light); text-decoration:none; font-size:12px; letter-spacing:1px; transition:color .25s; }
+  nav a:hover { color:var(--blue); }
 
   /* HERO */
   .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 70px;
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:100px 40px 80px;
+    background: var(--white);
+    position:relative; overflow:hidden;
   }
 
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 5rem 4rem 5rem 5rem;
-    position: relative;
+  .hero::before {
+    content:'';
+    position:absolute; bottom:-100px; right:-80px;
+    width:500px; height:500px;
+    background: radial-gradient(circle, rgba(37,99,200,0.07) 0%, transparent 68%);
+    pointer-events:none;
   }
 
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    right: 0; top: 15%; bottom: 15%;
-    width: 1px;
-    background: var(--border);
+  .hero::after {
+    content:'';
+    position:absolute; top:0; left:0; right:0;
+    height:4px;
+    background: linear-gradient(90deg, var(--navy), var(--blue));
   }
 
-  .hero-tag {
-    display: inline-block;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    color: var(--sage-dark);
-    border: 1px solid var(--sage-light);
-    padding: 0.4rem 1rem;
-    border-radius: 999px;
-    margin-bottom: 2rem;
-    width: fit-content;
+  .badge {
+    display:inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size:11px; font-weight:700; letter-spacing:3px;
+    padding:5px 16px;
+    margin-bottom:36px;
+    opacity:0; animation:up .5s .1s forwards;
   }
 
   .hero-title {
-    font-family: 'Shippori Mincho', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 500;
-    line-height: 1.6;
-    color: var(--brown-dark);
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.02em;
+    margin-bottom:32px;
+    opacity:0; animation:up .5s .3s forwards;
+  }
+  .hero-title .row1 { display:block; font-size:clamp(44px,7vw,88px); font-weight:900; line-height:1.05; color:var(--blue); }
+  .hero-title .row2 { display:block; font-size:clamp(52px,9vw,108px); font-weight:900; line-height:1.05; color:var(--navy); }
+  .hero-title .row3 { display:block; font-size:clamp(36px,5.5vw,68px); font-weight:900; line-height:1.15; color:var(--blue); }
+
+  .hero-body {
+    font-size:clamp(14px,1.8vw,17px);
+    line-height:2; color:var(--mid);
+    margin-bottom:48px; max-width:480px;
+    opacity:0; animation:up .5s .5s forwards;
+  }
+  .hero-body strong { color:var(--dark); font-weight:700; }
+
+  .price-box {
+    display:inline-flex; align-items:baseline; flex-wrap:wrap; gap:8px;
+    background: var(--bg);
+    border:1px solid var(--border);
+    border-left:5px solid var(--blue);
+    padding:20px 28px;
+    margin-bottom:40px;
+    opacity:0; animation:up .5s .7s forwards;
+  }
+  .price-box .pl { font-size:12px; color:var(--light); }
+  .price-box .pn { font-size:52px; font-weight:900; color:var(--blue); line-height:1; }
+  .price-box .pu { font-size:15px; color:var(--light); }
+  .price-box .pnote { font-size:11px; color:#aaa; }
+
+  .btn {
+    display:inline-block;
+    background:var(--navy); color:#fff;
+    padding:17px 48px;
+    font-size:15px; font-weight:700; letter-spacing:1px;
+    text-decoration:none; transition:all .25s;
+    opacity:0; animation:up .5s .9s forwards;
+  }
+  .btn:hover { background:var(--navy2); transform:translateY(-2px); }
+  .btn-note { font-size:12px; color:var(--light); margin-top:14px; opacity:0; animation:up .5s 1s forwards; }
+
+  /* SECTIONS */
+  .sec { padding:96px 40px; }
+  .sec-inner { max-width:860px; margin:0 auto; }
+  .sec-alt { background:var(--bg2); }
+  .sec-navy {
+    background:var(--navy);
+    color:#fff;
+  }
+  .sec-navy h2 { color:#fff; }
+  .sec-navy .label { color:var(--blue2); }
+
+  .label {
+    font-size:10px; font-weight:700; letter-spacing:4px;
+    color:var(--blue); margin-bottom:18px;
   }
 
-  .hero-title em {
-    font-style: normal;
-    color: var(--sage-dark);
-    position: relative;
-  }
-
-  .hero-title em::after {
-    content: '';
-    position: absolute;
-    bottom: 2px; left: 0; right: 0;
-    height: 2px;
-    background: var(--sage-light);
-    border-radius: 2px;
-  }
-
-  .hero-sub {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    max-width: 360px;
-    margin-bottom: 2.5rem;
-    line-height: 2;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    background: var(--sage-dark);
-    color: white;
-    padding: 1rem 2.5rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-size: 0.88rem;
-    letter-spacing: 0.1em;
-    transition: all 0.3s;
-    width: fit-content;
-  }
-
-  .btn-primary:hover {
-    background: var(--brown-dark);
-    transform: translateY(-2px);
-  }
-
-  .hero-right {
-    background: var(--cream);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-visual {
-    position: relative;
-    width: 320px;
-    height: 420px;
-  }
-
-  .hero-card {
-    position: absolute;
-    background: white;
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.06);
-  }
-
-  .hero-card-main {
-    width: 260px;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .hero-card-main .card-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    color: var(--sage-dark);
-    margin-bottom: 0.8rem;
-  }
-
-  .hero-card-main .card-title {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 1.1rem;
-    color: var(--brown-dark);
-    margin-bottom: 1rem;
-  }
-
-  .day-dots {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 1rem;
-  }
-
-  .day-dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.65rem;
-    font-weight: 500;
-  }
-
-  .day-dot.done { background: var(--sage-dark); color: white; }
-  .day-dot.today { background: var(--brown-light); color: white; }
-  .day-dot.upcoming { background: var(--cream); color: var(--text-muted); border: 1px solid var(--border); }
-
-  .progress-bar {
-    height: 4px;
-    background: var(--cream);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    width: 57%;
-    background: linear-gradient(90deg, var(--sage-light), var(--sage-dark));
-    border-radius: 4px;
-    animation: fillProgress 1.5s ease-out 0.5s both;
-  }
-
-  @keyframes fillProgress {
-    from { width: 0; }
-    to { width: 57%; }
-  }
-
-  .hero-card-mini {
-    width: 150px;
-    padding: 1rem;
-  }
-
-  .hero-card-mini-1 {
-    top: 30px;
-    right: -20px;
-    transform: rotate(3deg);
-  }
-
-  .hero-card-mini-2 {
-    bottom: 40px;
-    left: -20px;
-    transform: rotate(-2deg);
-  }
-
-  .mini-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-  }
-
-  .mini-icon.green { background: #e8f0e4; }
-  .mini-icon.brown { background: #f0e8dc; }
-
-  .mini-text {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-
-  .mini-num {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 1.3rem;
-    color: var(--brown-dark);
-  }
-
-  /* SECTION COMMON */
-  section {
-    padding: 6rem 5rem;
-  }
-
-  .section-tag {
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    color: var(--sage-dark);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: 'Shippori Mincho', serif;
-    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-    font-weight: 500;
-    color: var(--brown-dark);
-    line-height: 1.5;
-    margin-bottom: 1rem;
-  }
-
-  .section-sub {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    max-width: 480px;
-    line-height: 2;
-  }
-
-  /* CONCEPT */
-  .concept {
-    background: var(--cream);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .concept-visual {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .concept-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-  }
-
-  .concept-card:first-child {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-  }
-
-  .concept-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: var(--cream);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-
-  .concept-card-title {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--brown-dark);
-    margin-bottom: 0.3rem;
-  }
-
-  .concept-card-text {
-    font-size: 0.76rem;
-    color: var(--text-muted);
-    line-height: 1.7;
+  h2 {
+    font-size:clamp(26px,4vw,48px);
+    font-weight:900; line-height:1.25;
+    color:var(--navy); margin-bottom:44px;
   }
 
   /* FOR WHO */
-  .for-who {
-    background: white;
+  .rows { display:grid; }
+  .row {
+    display:flex; gap:18px; align-items:flex-start;
+    padding:22px 0;
+    border-bottom:1px solid var(--border);
   }
+  .row:first-child { border-top:1px solid var(--border); }
+  .row-icon { font-size:20px; min-width:28px; padding-top:2px; }
+  .row-text { font-size:15px; line-height:1.8; color:var(--mid); }
+  .row-text strong { display:block; font-size:16px; font-weight:700; color:var(--dark); margin-bottom:3px; }
 
-  .for-who-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
+  /* STORY */
+  .story-p { font-size:16px; line-height:2.1; color:var(--mid); margin-bottom:22px; }
+  .story-p strong { color:var(--dark); font-weight:700; }
+  .story-q {
+    border-left:5px solid var(--blue);
+    background:var(--blue-pale);
+    padding:28px 32px; margin-top:44px;
   }
+  .story-q p { font-size:18px; font-weight:700; line-height:1.9; color:var(--navy); }
+  .story-q .hl { color:var(--blue); }
 
-  .for-who-item {
-    background: var(--cream);
-    border-radius: 16px;
-    padding: 2rem 1.5rem;
-    border: 1px solid var(--border);
-    transition: transform 0.3s;
+  /* STEPS */
+  .steps { display:grid; gap:2px; }
+  .step {
+    background:var(--white);
+    border:1px solid var(--border);
+    border-left:4px solid transparent;
+    padding:34px 30px;
+    display:flex; gap:24px; align-items:flex-start;
+    transition:border-color .25s, background .25s;
   }
+  .step:hover { border-left-color:var(--blue); background:var(--blue-pale); }
+  .step-n { font-size:38px; font-weight:900; color:var(--blue); line-height:1; min-width:50px; }
+  .step h3 { font-size:17px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+  .step p { font-size:14px; line-height:1.9; color:var(--mid); }
 
-  .for-who-item:hover { transform: translateY(-4px); }
-
-  .for-who-num {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 2rem;
-    color: var(--sage-light);
-    margin-bottom: 0.8rem;
+  /* CONCEPT */
+  .cards {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:12px;
   }
-
-  .for-who-text {
-    font-size: 0.88rem;
-    color: var(--text);
-    font-weight: 400;
-    line-height: 1.8;
+  .card {
+    background:var(--white);
+    border:1px solid var(--border);
+    border-top:3px solid var(--blue);
+    padding:34px 26px;
+    transition:all .25s;
   }
-
-  /* 7 DAYS */
-  .seven-days {
-    background: var(--cream);
-  }
-
-  .days-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 0.8rem;
-    margin-top: 3rem;
-  }
-
-  .day-item {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem 1rem;
-    text-align: center;
-    border: 1px solid var(--border);
-    transition: all 0.3s;
-    cursor: default;
-  }
-
-  .day-item:hover {
-    border-color: var(--sage-light);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(90, 112, 80, 0.1);
-  }
-
-  .day-num {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 0.7rem;
-    color: var(--sage-dark);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.8rem;
-  }
-
-  .day-theme {
-    font-size: 0.78rem;
-    color: var(--brown-dark);
-    font-weight: 500;
-    line-height: 1.5;
-  }
-
-  .day-bar {
-    height: 3px;
-    background: var(--cream);
-    border-radius: 3px;
-    margin: 1rem auto 0;
-    width: 80%;
-    overflow: hidden;
-  }
-
-  .day-bar-fill {
-    height: 100%;
-    background: var(--sage-light);
-    border-radius: 3px;
-    width: 0;
-    transition: width 0.8s ease;
-  }
-
-  .day-item:hover .day-bar-fill { width: 100%; }
+  .card:hover { background:var(--blue-pale); transform:translateY(-3px); box-shadow:0 8px 24px rgba(37,99,200,0.1); }
+  .card-icon { font-size:26px; margin-bottom:14px; }
+  .card h3 { font-size:16px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+  .card p { font-size:13px; line-height:1.9; color:var(--mid); }
 
   /* PROFILE */
-  .profile {
-    background: white;
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 5rem;
-    align-items: center;
+  .profile-grid {
+    display:grid;
+    grid-template-columns:250px 1fr;
+    gap:56px; align-items:start;
   }
-
-  .profile-img-wrap {
-    position: relative;
+  .profile-img {
+    background:var(--bg2);
+    border:1px solid var(--border);
+    aspect-ratio:3/4;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--light); font-size:12px; letter-spacing:2px;
   }
-
-  .profile-img-placeholder {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: var(--cream);
-    border-radius: 24px;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .profile-img-placeholder span {
-    font-size: 3rem;
-  }
-
-  .profile-img-placeholder p {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-
-  .profile-badge {
-    position: absolute;
-    bottom: -1rem;
-    right: -1rem;
-    background: var(--sage-dark);
-    color: white;
-    border-radius: 12px;
-    padding: 0.8rem 1.2rem;
-    font-size: 0.75rem;
-    line-height: 1.5;
-  }
-
-  .profile-name {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 1.8rem;
-    color: var(--brown-dark);
-    margin-bottom: 0.3rem;
-  }
-
-  .profile-title {
-    font-size: 0.82rem;
-    color: var(--sage-dark);
-    letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
-  }
-
-  .profile-text {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 2.2;
-    margin-bottom: 2rem;
-  }
-
-  .profile-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .profile-tag {
-    font-size: 0.75rem;
-    color: var(--sage-dark);
-    border: 1px solid var(--sage-light);
-    padding: 0.3rem 0.9rem;
-    border-radius: 999px;
+  .pname { font-size:clamp(40px,6vw,64px); font-weight:900; color:var(--navy); line-height:1; margin-bottom:6px; }
+  .prole { font-size:10px; letter-spacing:3px; color:var(--light); margin-bottom:32px; }
+  .pt { font-size:15px; line-height:2; color:var(--mid); margin-bottom:12px; }
+  .pt strong { color:var(--dark); font-weight:700; }
+  .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+  .tag {
+    border:1px solid var(--border);
+    background:var(--white);
+    padding:4px 14px;
+    font-size:11px; letter-spacing:1px; color:var(--mid);
   }
 
   /* CTA */
   .cta {
-    background: var(--brown-dark);
-    text-align: center;
-    padding: 6rem 5rem;
+    padding:96px 40px;
+    background:var(--navy);
+    text-align:center;
+    position:relative; overflow:hidden;
   }
-
-  .cta .section-tag { color: var(--brown-light); }
-
-  .cta .section-title { color: white; }
-
-  .cta .section-sub {
-    color: rgba(255,255,255,0.6);
-    margin: 1rem auto 2.5rem;
+  .cta::before {
+    content:'';
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:700px; height:700px;
+    background:radial-gradient(circle, rgba(59,122,224,0.15) 0%, transparent 68%);
+    pointer-events:none;
   }
-
-  .btn-light {
-    display: inline-block;
-    background: white;
-    color: var(--brown-dark);
-    padding: 1rem 2.5rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-size: 0.88rem;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-    transition: all 0.3s;
+  .cta .label { color:var(--blue2); }
+  .cta h2 { color:#fff; margin-bottom:14px; }
+  .cta-sub { font-size:15px; color:#aac0e0; line-height:1.9; margin-bottom:36px; }
+  .cta-price {
+    display:inline-flex; align-items:baseline; gap:6px;
+    flex-wrap:wrap; justify-content:center; margin-bottom:36px;
   }
-
-  .btn-light:hover {
-    background: var(--cream);
-    transform: translateY(-2px);
+  .cta-pl { font-size:14px; color:#aac0e0; margin-right:6px; }
+  .cta-pn { font-size:72px; font-weight:900; color:#ffffff; line-height:1; }
+  .cta-pu { font-size:20px; color:#aac0e0; }
+  .cta-btn {
+    display:inline-block;
+    background:var(--blue); color:#fff;
+    padding:20px 64px;
+    font-size:16px; font-weight:700; letter-spacing:1px;
+    text-decoration:none; transition:all .25s;
+    margin-bottom:14px;
   }
+  .cta-btn:hover { background:var(--blue2); transform:translateY(-2px); }
+  .cta-note { font-size:12px; color:#7a9cc0; }
 
   /* FOOTER */
   footer {
-    background: var(--text);
-    color: rgba(255,255,255,0.4);
-    text-align: center;
-    padding: 2.5rem 2rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
+    padding:36px 40px;
+    background:var(--navy2);
+    border-top:1px solid rgba(255,255,255,0.08);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+  .f-logo { font-size:16px; font-weight:900; letter-spacing:3px; color:#fff; }
+  .f-logo em { color:var(--blue2); font-style:normal; }
+  .f-links { display:flex; gap:24px; }
+  .f-links a { color:#7a9cc0; text-decoration:none; font-size:13px; transition:color .25s; }
+  .f-links a:hover { color:#fff; }
+  .f-copy { font-size:11px; color:#4a6a8a; }
+
+  @keyframes up {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
   }
 
-  .footer-social {
-    display: flex;
-    justify-content: center;
-    gap: 1.2rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .footer-social a {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    transition: color 0.3s;
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 999px;
-    padding: 0.4rem 1rem;
-  }
-
-  .footer-social a:hover { color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.4); }
-
-  .footer-social svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
-
-  /* ANIMATIONS */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 4rem 1.5rem 2rem; }
-    .hero-left::after { display: none; }
-    .hero-right { height: 320px; }
-    .hero-visual { width: 240px; height: 300px; }
-    .hero-card-main { width: 200px; }
-    section { padding: 4rem 1.5rem; }
-    .concept { grid-template-columns: 1fr; gap: 2rem; }
-    .for-who-grid { grid-template-columns: 1fr; }
-    .days-grid { grid-template-columns: repeat(4, 1fr); }
-    .profile { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-card-mini { display: none; }
+  @media (max-width:768px) {
+    nav ul { display:none; }
+    .sec, .cta { padding:72px 24px; }
+    .hero { padding:90px 24px 60px; }
+    .profile-grid { grid-template-columns:1fr; gap:36px; }
+    footer { padding:28px 24px; flex-direction:column; text-align:center; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">marogym</div>
-  <ul class="nav-links">
-    <li><a href="#concept">コンセプト</a></li>
+  <div class="logo">maro<em>gym</em></div>
+  <ul>
+    <li><a href="#forwho">こんな人へ</a></li>
+    <li><a href="#story">ストーリー</a></li>
     <li><a href="#program">プログラム</a></li>
-    <li><a href="#profile">プロフィール</a></li>
-    <li><a href="#cta">お申し込み</a></li>
+    <li><a href="#cta">申し込む</a></li>
   </ul>
-  <div class="nav-social">
-    <a href="https://www.instagram.com/maro0114_gym" target="_blank" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    </a>
-    <a href="https://www.youtube.com/@%E3%81%BE%E3%82%8D-t1x1r" target="_blank" aria-label="YouTube">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-    </a>
-    <a href="https://s.lemon8-app.com/s/GgFpQvcYhk" target="_blank" aria-label="Lemon8">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4a8 8 0 1 1 0 16A8 8 0 0 1 12 4zm-1 4v4H7l5 5 5-5h-4V8h-2z"/></svg>
-    </a>
-  </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-left">
-    <span class="hero-tag">ONLINE GYM BY MAROGYM</span>
-    <h1 class="hero-title">
-      運動を<em>やる気</em>ではなく、<br>
-      習慣として続ける。
-    </h1>
-    <p class="hero-sub">
-      忙しい毎日の中でも、歯磨きのように自然と運動できる仕組みをつくります。特別な意志力は必要ありません。
-    </p>
-    <a href="#cta" class="btn-primary">7日間プログラムを見る</a>
+  <div class="badge">30代・ズボラ・続かない人専門</div>
+  <h1 class="hero-title">
+    <span class="row1">ゆるく</span>
+    <span class="row2">続けられる</span>
+    <span class="row3">人になる。</span>
+  </h1>
+  <p class="hero-body">
+    またジム辞めた？<strong>それ、あなたのせいじゃない。</strong><br>
+    続けられる仕組みがなかっただけ。<br>
+    頑張らなくていい。ゆるくでいい。
+  </p>
+  <div class="price-box">
+    <span class="pl">モニター価格</span>
+    <span class="pn">¥3,000</span>
+    <span class="pu">/ 月</span>
+    <span class="pnote">※限定募集中</span>
   </div>
-  <div class="hero-right">
-    <div class="hero-visual">
-      <div class="hero-card hero-card-main">
-        <div class="card-label">7日間習慣リセット</div>
-        <div class="card-title">今日はDAY 4</div>
-        <div class="day-dots">
-          <div class="day-dot done">1</div>
-          <div class="day-dot done">2</div>
-          <div class="day-dot done">3</div>
-          <div class="day-dot today">4</div>
-          <div class="day-dot upcoming">5</div>
-          <div class="day-dot upcoming">6</div>
-          <div class="day-dot upcoming">7</div>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
-        </div>
+  <a href="#cta" class="btn">まず話だけ聞いてみる →</a>
+  <p class="btn-note">申し込みじゃなくていいです。相談だけでも。</p>
+</section>
+
+<section class="sec sec-alt" id="forwho">
+  <div class="sec-inner">
+    <p class="label">FOR WHO</p>
+    <h2>こういう人、<br>待ってました。</h2>
+    <div class="rows">
+      <div class="row">
+        <div class="row-icon">💀</div>
+        <div class="row-text"><strong>ジムに入っては幽霊→退会をくりかえしてる</strong>入会金だけで何万払ったか数えたくない。</div>
       </div>
-      <div class="hero-card hero-card-mini hero-card-mini-1">
-        <div class="mini-icon green">🌿</div>
-        <div class="mini-num">3分</div>
-        <div class="mini-text">毎日の運動時間</div>
+      <div class="row">
+        <div class="row-icon">🛋️</div>
+        <div class="row-text"><strong>帰宅後は動けない。休日はゴロゴロしたい</strong>それが普通だし、それでいい。</div>
       </div>
-      <div class="hero-card hero-card-mini hero-card-mini-2">
-        <div class="mini-icon brown">✓</div>
-        <div class="mini-num">週1回</div>
-        <div class="mini-text">プロのサポート</div>
+      <div class="row">
+        <div class="row-icon">🔥</div>
+        <div class="row-text"><strong>「結果にコミット」系は無理だとわかってる</strong>ガチ系が続いたことが一度もない。</div>
+      </div>
+      <div class="row">
+        <div class="row-icon">😔</div>
+        <div class="row-text"><strong>30代になって体力落ちてきた</strong>昔と同じことしてるのになんか疲れる。</div>
+      </div>
+      <div class="row">
+        <div class="row-icon">⏰</div>
+        <div class="row-text"><strong>忙しいを言い訳にしてる自分が嫌</strong>でも本当に忙しいし、時間もない。</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONCEPT -->
-<section class="concept fade-up" id="concept">
-  <div>
-    <div class="section-tag">CONCEPT</div>
-    <h2 class="section-title">
-      続かないのは<br>意志が弱いからじゃない。
-    </h2>
-    <p class="section-sub">
-      運動が続かない本当の理由は、仕組みがないから。marogymでは、習慣設計の専門知識を使って、あなたの生活に自然と溶け込む運動の仕組みをつくります。
-    </p>
+<section class="sec" id="story">
+  <div class="sec-inner">
+    <p class="label">STORY</p>
+    <h2>運動嫌いが、<br>少しだけ好きになる<br>瞬間が好きだ。</h2>
+    <p class="story-p">私がトレーナーをやってきた中でずっと関わってきたのは、<strong>「運動が苦手で、やりたくない人たち」</strong>でした。子どもも、大人も。</p>
+    <p class="story-p">最初のお客さんは、仕事が忙しくて運動なんてしたくない、というサラリーマンの方。「続けるつもりはない」って最初から言ってた。</p>
+    <p class="story-p">でも半年後、<strong>10キロ痩せて、自分からスクワットをやるようになってた。</strong></p>
+    <p class="story-p">別の人は筋トレは大嫌いだけど走るのは好きだと気づいた。それだけで習慣が変わった。</p>
+    <p class="story-p">「頑張れ」じゃなくて、<strong>「これならできる」を一緒に見つけること。</strong>それがmarogymのやり方です。</p>
+    <div class="story-q">
+      <p>「筋トレが好きになってほしい」じゃない。<br>
+      <span class="hl">「運動が、ちょっとだけ嫌いじゃなくなってほしい。」</span><br>
+      それだけでいい。</p>
+    </div>
   </div>
-  <div class="concept-visual">
-    <div class="concept-card">
-      <div class="concept-icon">🌿</div>
+</section>
+
+<section class="sec sec-alt" id="program">
+  <div class="sec-inner">
+    <p class="label">PROGRAM</p>
+    <h2>続けられる状態を<br>作ってから、終わる。</h2>
+    <p style="font-size:15px;color:var(--mid);margin-bottom:44px;margin-top:-28px;line-height:1.8;">一生サポートするんじゃなく、「一人でも続けられる」状態を作るのがゴール。</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div>
+          <h3>「続かない原因」を一緒に見つける</h3>
+          <p>時間がないのか、興味がないのか、何が邪魔してるのか。あなた専用の「続けられる最小習慣」を設計します。週1回・1日5分からでOK。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div>
+          <h3>習慣が定着したら卒業→サブスクへ</h3>
+          <p>「一人でできそう」と思えたタイミングで卒業。サブスクコンテンツで習慣をキープしながら、自分のペースで続けられます。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div>
+          <h3>また崩れても戻れる場所がある</h3>
+          <p>三日坊主になっても大丈夫。「また戻れる場所」を作っておくから、完全に辞めなくていい。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="concept">
+  <div class="sec-inner">
+    <p class="label">CONCEPT</p>
+    <h2>ゆるく続ける、<br>が専門です。</h2>
+    <p style="font-size:15px;color:var(--mid);margin-bottom:44px;margin-top:-28px;">大手ジムがやらない「続かない人を続けさせる」ことだけに特化しています。</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">💤</div>
+        <h3>やる気に頼らない</h3>
+        <p>モチベーションは続かない。だから仕組みで続く設計をします。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⏱️</div>
+        <h3>1日5分からOK</h3>
+        <p>完璧なメニューより、続けられる最小限から。ゴロゴロしながらでもできる。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>その人に合った運動を見つける</h3>
+        <p>向いてる運動は人によって違う。筋トレじゃなくてもいい。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h3>週1回オンラインで完結</h3>
+        <p>ジムに行かなくていい。自宅でOK。忙しい30代でも続けられます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt" id="profile">
+  <div class="sec-inner">
+    <div class="profile-grid">
+      <div class="profile-img">PHOTO</div>
       <div>
-        <div class="concept-card-title">やる気に頼らない設計</div>
-        <div class="concept-card-text">モチベーションが低い日でも続けられる仕組みを一緒に作ります</div>
+        <p class="label">TRAINER</p>
+        <p class="pname">まひろ</p>
+        <p class="prole">PERSONAL TRAINER / HABIT COACH</p>
+        <p class="pt">子どもから大人まで、ずっと<strong>「運動が嫌いな人・続かない人」</strong>と関わってきました。</p>
+        <p class="pt">結果にコミットするガチ系は私には向いてない。でも<strong>「ゆるく続ける」</strong>なら、誰でもできると思ってる。</p>
+        <p class="pt">続かないのはあなたのせいじゃない。仕組みがなかっただけ。</p>
+        <div class="tags">
+          <span class="tag">パーソナルトレーナー</span>
+          <span class="tag">習慣化コーチ</span>
+          <span class="tag">30代専門</span>
+          <span class="tag">オンライン対応</span>
+          <span class="tag">自宅完結</span>
+        </div>
       </div>
     </div>
-    <div class="concept-card">
-      <div class="concept-icon">⏱</div>
-      <div class="concept-card-title">1日3分から</div>
-      <div class="concept-card-text">忙しくても続けられる現実的な時間設計</div>
-    </div>
-    <div class="concept-card">
-      <div class="concept-icon">🗓</div>
-      <div class="concept-card-title">週1サポート</div>
-      <div class="concept-card-text">毎週プロが進捗を確認してアドバイス</div>
-    </div>
   </div>
 </section>
 
-<!-- FOR WHO -->
-<section class="for-who fade-up" id="forwho">
-  <div class="section-tag">FOR WHO</div>
-  <h2 class="section-title">こんな方におすすめです</h2>
-  <div class="for-who-grid">
-    <div class="for-who-item">
-      <div class="for-who-num">01</div>
-      <div class="for-who-text">仕事が忙しくて運動の時間がなかなか取れない社会人の方</div>
-    </div>
-    <div class="for-who-item">
-      <div class="for-who-num">02</div>
-      <div class="for-who-text">何度チャレンジしても運動が続かず、自己嫌悪になってしまう方</div>
-    </div>
-    <div class="for-who-item">
-      <div class="for-who-num">03</div>
-      <div class="for-who-text">20代後半〜40代で、無理なく健康的な習慣を身につけたい方</div>
-    </div>
-  </div>
+<section class="cta" id="cta">
+  <p class="label">GET STARTED</p>
+  <h2>まず、話だけ<br>聞いてみませんか？</h2>
+  <p class="cta-sub">申し込みじゃなくていいです。<br>どんな人か知るところから始めましょう。</p>
+  <div class="cta-price">
+    <span class="cta-pl">モニター価格</span>
+    <span class="cta-pn">¥3,000</span>
+    <span class="cta-pu">/ 月</span>
+  </div><br>
+  <a href="https://coconala.com" class="cta-btn">ここから相談してみる →</a>
+  <p class="cta-note">※モニター限定の価格です。枠に限りがあります。</p>
 </section>
 
-<!-- 7 DAYS -->
-<section class="seven-days fade-up" id="program">
-  <div class="section-tag">PROGRAM</div>
-  <h2 class="section-title">7日間習慣リセット</h2>
-  <p class="section-sub">運動メニューはご購入後、あなたの生活スタイルに合わせて個別にご提案します。</p>
-  <div class="days-grid">
-    <div class="day-item">
-      <div class="day-num">DAY 1</div>
-      <div class="day-theme">とりあえずやる</div>
-      <div class="day-bar"><div class="day-bar-fill"></div></div>
-    </div>
-    <div class="day-item">
-      <div class="day-num">DAY 2</div>
-      <div class="day-theme">タイミングを決める</div>
-      <div class="day-bar"><div class="day-bar-fill"></div></div>
-    </div>
-    <div class="day-item">
-      <div class="day-num">DAY 3</div>
-      <div class="day-theme">環境を作る</div>
-      <div class="day-bar"><div class="day-bar-fill"></div></div>
-    </div>
-    <div class="day-item">
-      <div class="day-num">DAY 4</div>
-      <div class="day-theme">サボり対策</div>
-      <div class="day-bar"><div class="day-bar-fill"></div></div>
-    </div>
-    <div class="day-item">
-      <div class="day-num">DAY 5</div>
-      <div class="day-theme">少し負荷UP</div>
-      <div class="day-bar"><div class="day-bar-fill"></div></div>
-    </div>
-    <div class="day-item">
-      <div class="day-num">DAY 6</div>
-      <div class="day-theme">自動化確認</div>
-      <div class="day-bar"><div class="day-bar-fill"></div></div>
-    </div>
-    <div class="day-item">
-      <div class="day-num">DAY 7</div>
-      <div class="day-theme">継続設計</div>
-      <div class="day-bar"><div class="day-bar-fill"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PROFILE -->
-<section class="profile fade-up" id="profile">
-  <div class="profile-img-wrap">
-    <div class="profile-img-placeholder">
-      <span>🌿</span>
-      <p>ここに写真を入れてください</p>
-    </div>
-    <div class="profile-badge">
-      パーソナルトレーナー<br>習慣化コーチ
-    </div>
-  </div>
-  <div>
-    <div class="section-tag">PROFILE</div>
-    <h2 class="profile-name">まひろ</h2>
-    <div class="profile-title">PERSONAL TRAINER / HABIT COACH</div>
-    <p class="profile-text">
-      「運動したいけど続かない」という悩みを持つ方専門のパーソナルトレーナー。筋トレの知識だけでなく、習慣設計の観点から、あなたの生活に自然と溶け込む運動の仕組みづくりをサポートします。<br><br>
-      忙しい社会人の方が、やる気に頼らず長く続けられる仕組みを一緒に作ることが得意です。
-    </p>
-    <div class="profile-tags">
-      <span class="profile-tag">パーソナルトレーナー</span>
-      <span class="profile-tag">習慣化サポート</span>
-      <span class="profile-tag">社会人専門</span>
-      <span class="profile-tag">オンライン対応</span>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta fade-up" id="cta">
-  <div class="section-tag">GET STARTED</div>
-  <h2 class="section-title">まず、7日間試してみませんか？</h2>
-  <p class="section-sub">ご購入後にあなたの生活スタイルをお聞きして、個別のプログラムをご提案します。</p>
-  <a href="https://coconala.com" class="btn-light" target="_blank">ココナラで申し込む →</a>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-social">
-    <a href="https://www.instagram.com/maro0114_gym" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      Instagram
-    </a>
-    <a href="https://www.youtube.com/@%E3%81%BE%E3%82%8D-t1x1r" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      YouTube
-    </a>
-    <a href="https://s.lemon8-app.com/s/GgFpQvcYhk" target="_blank">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8" stroke="white" stroke-width="2" fill="none"/></svg>
-      Lemon8
-    </a>
+  <div class="f-logo">maro<em>gym</em></div>
+  <div class="f-links">
+    <a href="https://www.instagram.com/maro0114_gym">Instagram</a>
+    <a href="https://www.youtube.com/@まろ-t1x1r">YouTube</a>
+    <a href="https://s.lemon8-app.com/s/GgFpQvcYhk">Lemon8</a>
   </div>
-  <p>© 2025 marogym. All rights reserved.</p>
+  <p class="f-copy">© 2025 marogym. All rights reserved.</p>
 </footer>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-</script>
 </body>
 </html>
